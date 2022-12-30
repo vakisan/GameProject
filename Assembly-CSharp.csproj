@@ -702,14 +702,26 @@
     <Reference Include="Unity.VisualScripting.State.Editor">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.ProBuilder.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+    <Reference Include="Unity.ProBuilder.Editor">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.ProBuilder.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
@@ -720,20 +732,29 @@
     <Reference Include="Unity.Rider.Editor">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Services.Core">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
+    <Reference Include="Unity.PlasticSCM.Editor">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Cinemachine">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
@@ -744,11 +765,17 @@
     <Reference Include="com.unity.cinemachine.editor">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Services.Core.Environments">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.Services.Core.Environments.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
@@ -756,38 +783,11 @@
     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Searcher.Editor">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
         <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ShaderGraph.Editor">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.ProBuilder.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AddOns.Editor">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.ProBuilder.AddOns.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.Editor">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.ProBuilder.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+    <Reference Include="Unity.VisualScripting.State">
+        <HintPath>C:\Users\vakis\Documents\MysteryValley\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
