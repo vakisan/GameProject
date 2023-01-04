@@ -44,6 +44,24 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""f4ff47dc-0b3c-4431-ac79-be11c499e03a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""eb674864-450d-4288-9810-16bbb5dc909b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -134,6 +152,28 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7cc893d3-9d64-4923-a3ba-28e2dcfa0521"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf5ad980-23a0-4fda-964e-c16a91dcc87d"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -156,6 +196,8 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
         m_Land = asset.FindActionMap("Land", throwIfNotFound: true);
         m_Land_Walk = m_Land.FindAction("Walk", throwIfNotFound: true);
         m_Land_Jump = m_Land.FindAction("Jump", throwIfNotFound: true);
+        m_Land_Pause = m_Land.FindAction("Pause", throwIfNotFound: true);
+        m_Land_Shoot = m_Land.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -217,12 +259,16 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     private ILandActions m_LandActionsCallbackInterface;
     private readonly InputAction m_Land_Walk;
     private readonly InputAction m_Land_Jump;
+    private readonly InputAction m_Land_Pause;
+    private readonly InputAction m_Land_Shoot;
     public struct LandActions
     {
         private @PlayerControl m_Wrapper;
         public LandActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Walk => m_Wrapper.m_Land_Walk;
         public InputAction @Jump => m_Wrapper.m_Land_Jump;
+        public InputAction @Pause => m_Wrapper.m_Land_Pause;
+        public InputAction @Shoot => m_Wrapper.m_Land_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Land; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -238,6 +284,12 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_LandActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnJump;
+                @Pause.started -= m_Wrapper.m_LandActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnPause;
+                @Shoot.started -= m_Wrapper.m_LandActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnShoot;
             }
             m_Wrapper.m_LandActionsCallbackInterface = instance;
             if (instance != null)
@@ -248,6 +300,12 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
         }
     }
@@ -265,5 +323,7 @@ public partial class @PlayerControl : IInputActionCollection2, IDisposable
     {
         void OnWalk(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }
