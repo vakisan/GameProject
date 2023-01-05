@@ -14,6 +14,8 @@ public class ThirdPersonCamera : MonoBehaviour
 
     public PlayerController playerController;
 
+    public CameraManager cameraManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,9 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(cameraManager.isFirstPersonCameraActive()){
+            return;
+        }
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
         orientation.forward = viewDir.normalized;
 
