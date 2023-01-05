@@ -7,4 +7,10 @@ public abstract class Weapon : MonoBehaviour
     public Camera fpsCam;
     public float damage;
     public float range;
+
+    
+    public virtual void Attack()
+    {
+
+    }
 }

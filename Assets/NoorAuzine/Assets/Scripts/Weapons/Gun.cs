@@ -1,9 +1,11 @@
 using UnityEngine;
 
 public class Gun : Weapon
-{
-    void Start()
+{   
+    //Initialize variables
+    void Awake()
     {
+        fpsCam = Camera.main;
         damage = 10f;
         range = 100f;
     }
@@ -13,18 +15,15 @@ public class Gun : Weapon
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("Pressed left click");
-            Shoot();
+            Attack();
         }
     }
 
-    void Shoot()
+    public override void Attack()
     {
         RaycastHit hitInfo;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitInfo, range))
         {
-            Debug.Log(hitInfo.transform.name);
-
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)
             {
