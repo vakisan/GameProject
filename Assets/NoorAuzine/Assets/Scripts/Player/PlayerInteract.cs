@@ -39,4 +39,9 @@ public class PlayerInteract : MonoBehaviour
             }
         }
     }
+
+    public InputManager getInputManager(){
+        return this.inputManager;
+    }
+
 }

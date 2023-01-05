@@ -24,9 +24,12 @@ public class LevelSystem : MonoBehaviour
     [Range(7f, 14f)]
     public float divisionMultiplier = 7;
 
+    public InputManager inputManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        inputManager = GetComponent<InputManager>();
         frontXpBar.fillAmount = currentXp / requiredXp;
         backXpBar.fillAmount = currentXp / requiredXp;
         requiredXp = CalculateRequiredXp();
@@ -38,7 +41,7 @@ public class LevelSystem : MonoBehaviour
     void Update()
     {
         UpdateXpUI();
-        if(Input.GetKeyDown(KeyCode.Equals))
+        if(inputManager.onFoot.GainExperience.triggered)
         {
             GainExperienceManual(20);
         }

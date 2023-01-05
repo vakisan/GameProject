@@ -4,6 +4,7 @@ public class Gun : Weapon
 {
     void Start()
     {
+        inputManager = this.transform.parent.transform.parent.transform.parent.GetComponent<InputManager>();
         damage = 10f;
         range = 100f;
     }
@@ -11,7 +12,7 @@ public class Gun : Weapon
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (inputManager.onFoot.Shoot.triggered)
         {
             Debug.Log("Pressed left click");
             Shoot();

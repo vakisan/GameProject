@@ -14,8 +14,11 @@ public class PlayerHealth : MonoBehaviour
     public Image backHealthBar;
     public TextMeshProUGUI healthText;
     // Start is called before the first frame update
+
+    private InputManager inputManager;
     void Start()
     {
+        inputManager = GetComponent<InputManager>();
         health = maxHealth;
     }
 
@@ -24,11 +27,11 @@ public class PlayerHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
-        if(Input.GetKeyDown(KeyCode.A))
+        if(inputManager.onFoot.TakeDamage.triggered)
         {
             TakeDamage(Random.Range(5, 10));
         }
-        if(Input.GetKeyDown(KeyCode.S))
+        if(inputManager.onFoot.RestoreDamage.triggered)
         {
             RestoreHealth(Random.Range(5, 10));
         }
