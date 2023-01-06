@@ -27,6 +27,7 @@ public class Gun : Weapon
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)
             {
+                Debug.Log("shot target dummy");
                 target.TakeDamage(damage);
             }
         }  
