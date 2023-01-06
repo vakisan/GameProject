@@ -15,7 +15,7 @@ public class CollectiblePickup : MonoBehaviour
     public void pickupCollectible(){
         InventoryManager.getInventory().addCollectible(collectible);
         InventoryManager.getInventory().refreshCollectibles();
-        Destroy(collectible);
+        // Destroy(collectible);
         Debug.Log("Picked Up Item");
     }
 
