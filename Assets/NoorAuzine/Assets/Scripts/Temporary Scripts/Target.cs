@@ -7,6 +7,7 @@ public class Target : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        Debug.Log(health);
         if(health <= 0f)
         {
             Die();
