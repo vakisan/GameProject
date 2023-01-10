@@ -1,19 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class StateChase : State
 {
-    public bool isPlayerAttackable;
-    public StateAttack stateAttack;
-
-    public override State RunCurrentState()
+    public override State RunCurrentState(float distanceToTarget,NavMeshAgent agent, Transform target)
     {
-        if(isPlayerAttackable){
-            return stateAttack;
-        }
-        else{     
-            return this;
-        }
+        agent.SetDestination(target.position);
+        return this;
     }
 }

@@ -16,7 +16,6 @@ public class CharacterAI : MonoBehaviour {
     [Range(0,100)]
     public float walkRadius = 25;
 
-    public bool isRoaming = false;
     private void Awake(){
         navMeshAgent = GetComponent<NavMeshAgent>();
         if(navMeshAgent != null){
@@ -29,7 +28,6 @@ public class CharacterAI : MonoBehaviour {
     }
 
     public Vector3 Roam(){
-        isRoaming = true;
         Vector3 finalPosition = Vector3.zero;
         Vector3 randomPosition = Random.insideUnitSphere * walkRadius;
         randomPosition += transform.position;
@@ -40,7 +38,7 @@ public class CharacterAI : MonoBehaviour {
     }
 
     void Update(){
-        if(navMeshAgent!= null && isRoaming && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance){
+        if(navMeshAgent!= null && navMeshAgent.enabled && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance){
             navMeshAgent.SetDestination(Roam());
         }
     }

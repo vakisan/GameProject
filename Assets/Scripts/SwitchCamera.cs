@@ -25,13 +25,18 @@ public class SwitchCamera : MonoBehaviour
 
     private float NPC_LOOK_AT_ROTATION_SPEED = 5f;
 
-    private List<CharacterNPC> kinematicCharacterNPCList;
+    [SerializeField]
+    private Dictionary<int,CharacterNPC> kinematicCharacterNPCList;
+
+    RaycastHit raycastHit;
 
     public Canvas messageCanvas;
+    private CharacterNPC characterNPC;
+    private CharacterAI characterAI;
 
     private void Awake(){
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
-        kinematicCharacterNPCList = new List<CharacterNPC>();
+        kinematicCharacterNPCList = new Dictionary<int, CharacterNPC>();
         aimAction = playerInput.actions["Aim"];
         aimCanvas.enabled = false;
         characterCanvas.enabled = true;
@@ -64,23 +69,18 @@ public class SwitchCamera : MonoBehaviour
     }
 
     private void CheckObject(){
-        RaycastHit hit;
-        if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, 20f)){
-            if(hit.collider.gameObject.GetComponent<CharacterNPC>() != null){
-                CharacterNPC characterNPC = hit.collider.gameObject.GetComponent<CharacterNPC>();
-                CharacterAI characterAI = characterNPC.GetComponent<CharacterAI>();
+        if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out raycastHit, 20f)){
+            if(raycastHit.collider.gameObject.GetComponent<CharacterNPC>() != null){
+                this.characterNPC = raycastHit.collider.gameObject.GetComponent<CharacterNPC>();
+                this.characterAI = characterNPC.GetComponent<CharacterAI>();
+                // if(!kinematicCharacterNPCList.ContainsKey(characterNPC.GetInstanceID())){
+                //     Debug.Log("Added");
+                //     kinematicCharacterNPCList[characterNPC.GetInstanceID()] = characterNPC;
+                // }
                 messageCanvas.enabled = true;
                 uiText.text = "\"" + characterNPC.characterModel.dialogue.Trim() + "\"";
-                // transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward,Camera.main.transform.forward,1f * Time.deltaTime, 0.0f));
-                // characterNPC.transform.LookAt(Camera.main.transform,Vector3.up);
-                characterAI.isRoaming = false;
-                characterAI.GetNavMeshAgent().enabled = false;
+                // characterAI.GetNavMeshAgent().speed = 0;
                 LookAtPlayerSmooth(characterNPC);
-                // characterNPC.rigidbody.velocity = Vector3.zero;
-                // characterNPC.rigidbody.angularVelocity = Vector3.zero;
-                // characterNPC.rigidbody.isKinematic = true;
-                kinematicCharacterNPCList.Add(characterNPC);
-
             }
             else{
                 uiText.text = "";
@@ -98,18 +98,16 @@ public class SwitchCamera : MonoBehaviour
     }
 
     private void CancelAim(){
+        Debug.Log("Aim Cancelled");
         Cursor.lockState = CursorLockMode.None;
         virtualCamera.Priority -= cameraPriority;
         aimCanvas.enabled = false;
         characterCanvas.enabled = true;
         uiText.text = "";
         messageCanvas.enabled = false;
-        foreach(CharacterNPC characterNPC in kinematicCharacterNPCList){
-            CharacterAI characterAI = characterNPC.GetComponent<CharacterAI>();
-            characterAI.isRoaming = true;
-            characterAI.GetNavMeshAgent().enabled = true;
-            characterNPC.rigidbody.isKinematic = false;
-
-        }
+        // foreach(CharacterNPC characterNPC in kinematicCharacterNPCList.Values){
+            // characterAI = characterNPC.GetComponent<CharacterAI>();
+        // characterAI.GetNavMeshAgent().speed = characterAI.speed;
+        // }
     }
 }

@@ -6,37 +6,28 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour {
 
     [SerializeField]
-    // private Transform target;
+    private Transform target;
     private NavMeshAgent navMeshAgent;
-    private State currentState;
+    private NavMeshPath navMeshPath;
+    private StateMachineSystem stateMachineSystem;
 
     [Range(0,100)]
     public float speed = 5;
 
-    [Range(0,100)]
-    public float walkRadius = 25;
+    public float distanceToTarget;
+
     private void Awake(){
         navMeshAgent = GetComponent<NavMeshAgent>();
-
-        if(navMeshAgent != null){
-            navMeshAgent.SetDestination(Roam());
-        }
+        stateMachineSystem = GetComponent<StateMachineSystem>();
     }
 
-    public Vector3 Roam(){
-        Vector3 finalPosition = Vector3.zero;
-        Vector3 randomPosition = Random.insideUnitSphere * walkRadius;
-        randomPosition += transform.position;
-        if(NavMesh.SamplePosition(randomPosition,out NavMeshHit hit, walkRadius,1)){
-            finalPosition = hit.position;
-        }
-        return finalPosition;
+    public float CalculateDistanceToPlayer(){
+        return Vector3.Distance(target.position, navMeshAgent.transform.position);
     }
 
     void Update(){
-        if(navMeshAgent!= null && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance){
-            navMeshAgent.SetDestination(Roam());
-        }
+        distanceToTarget = CalculateDistanceToPlayer();
+        stateMachineSystem.RunStateMachine(distanceToTarget,navMeshAgent,target);
     }
 
 }
