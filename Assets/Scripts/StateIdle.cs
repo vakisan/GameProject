@@ -8,13 +8,33 @@ public class StateIdle : State
     [Range(0,100)]
     public float walkRadius = 25;
 
+    public PlayerHealth playerHealth;
+
+    private bool isRecovering = false;
+
     public override State RunCurrentState(float distanceToTarget,NavMeshAgent agent, Transform target)
     {
         if(agent!= null && agent.remainingDistance <= agent.stoppingDistance){
             agent.SetDestination(Roam());
         }
 
+        if(!isRecovering){
+            StartCoroutine("Wait");
+        }
+
+        
         return this;
+    }
+
+    void Awake(){
+        playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+    }
+
+    IEnumerator Wait(){
+        isRecovering = true;
+        yield return new WaitForSeconds(1);
+        playerHealth.RestoreHealth(Random.Range(5,10));
+        isRecovering = false;
     }
 
     

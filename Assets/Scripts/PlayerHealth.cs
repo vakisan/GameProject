@@ -33,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
     void OnDisable(){
         takeDamage.performed -= _ => TakeDamage(Random.Range(5, 10));
     }
-
+    
     // Update is called once per frame
     void Update()
     {

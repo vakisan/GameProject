@@ -14,8 +14,6 @@ public class StateMachineSystem : MonoBehaviour
         attackState = GetComponent<StateAttack>();
         chaseState = GetComponent<StateChase>();
         idleState = GetComponent<StateIdle>();
-
-        Debug.Log(attackState);
     }
 
     public void RunStateMachine(float distanceToTarget,NavMeshAgent agent, Transform target){
