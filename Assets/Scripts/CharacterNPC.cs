@@ -13,7 +13,7 @@ public class CharacterNPC : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
     }
     // Start is called before the first frame update
-    public void buildCharacter(bool coin, bool memo, string memoDetail,string dialogue)
+    public void buildCharacter(int coin, bool memo, string memoDetail,string dialogue)
     {
         characterModel.coin = coin;
         characterModel.memo = memo;

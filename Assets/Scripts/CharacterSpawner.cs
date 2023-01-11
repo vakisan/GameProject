@@ -18,7 +18,7 @@ public class CharacterSpawner : MonoBehaviour
     private float road_z; 
 
     [SerializeField]
-    public int difficulty = 5;
+    public int difficulty = 2;
     [SerializeField]
     public int difficultyFactor = 1;
     [SerializeField]
@@ -38,7 +38,7 @@ public class CharacterSpawner : MonoBehaviour
         charactersList = new List<CharacterModel>();
         int range = difficulty;
         for(int i= 0; i<range; i++){
-            bool coin = (Random.Range(0,1) >= 0.5);
+            int coin = (Random.Range(0,500));
             CharacterModel characterModel = CharacterModel.CreateInstance<CharacterModel>();
             characterModel.BuildCharacterModel(coin,false,"",new CharacterDialogue().getDialogue());
             charactersList.Add(characterModel);

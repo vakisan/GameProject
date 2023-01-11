@@ -563,6 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelMessage: {fileID: 0}
+  levelUISystem: {fileID: 0}
 --- !u!1 &4482632397193701635
 GameObject:
   m_ObjectHideFlags: 0

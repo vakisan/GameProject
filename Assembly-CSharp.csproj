@@ -58,6 +58,14 @@
      <Compile Include="Assets\Scripts\Timer.cs" />
      <Compile Include="Assets\Scripts\CharacterNPC.cs" />
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />
+     <Compile Include="Assets\Scripts\InventoryToggle.cs" />
+     <Compile Include="Assets\Scripts\Collectible.cs" />
+     <Compile Include="Assets\Scripts\InventoryManager.cs" />
+     <Compile Include="Assets\Scripts\CollectiblePickup.cs" />
+     <Compile Include="Assets\Scripts\InventoryClose.cs" />
+     <Compile Include="Assets\Scripts\CollectibleObject.cs" />
+     <Compile Include="Assets\Scripts\InventorySelect.cs" />
+     <Compile Include="Assets\Scripts\CollectibleUI.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

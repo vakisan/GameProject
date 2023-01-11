@@ -67,7 +67,7 @@ public class Timer : MonoBehaviour
         }
 
         if(timeValue < originaTimeValue-3){
-            levelSystem.displayLevelMessage(false);
+            levelSystem.displayIncreasedLevelMessage(false);
         }
 
         FormatTimerColour();
@@ -88,7 +88,7 @@ public class Timer : MonoBehaviour
     }
 
     void IncrementLevel(){
-        levelSystem.increaseLevel();
+        levelSystem.displayIncreasedLevelMessage(true);
         cleanUpLevel();
     }
 

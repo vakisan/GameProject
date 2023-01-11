@@ -19,7 +19,6 @@ public class StateMachineSystem : MonoBehaviour
     public void RunStateMachine(float distanceToTarget,NavMeshAgent agent, Transform target){
         SwitchNextState(distanceToTarget);
         currentState.RunCurrentState(distanceToTarget,agent,target);
-        Debug.Log(currentState);
     }
 
     void SwitchNextState(float distanceToTarget){

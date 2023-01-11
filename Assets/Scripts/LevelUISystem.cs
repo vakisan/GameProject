@@ -6,7 +6,7 @@ using TMPro;
 
 public class LevelUISystem : MonoBehaviour
 {
-    public int level;
+    public int level = 1;
     public float currentXp;
     public float requiredXp;
     private float lerpTimer;
@@ -27,6 +27,7 @@ public class LevelUISystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        level = 1;
         frontXpBar.fillAmount = currentXp / requiredXp;
         backXpBar.fillAmount = currentXp / requiredXp;
         requiredXp = CalculateRequiredXp();
@@ -38,10 +39,10 @@ public class LevelUISystem : MonoBehaviour
     void Update()
     {
         UpdateXpUI();
-        if(Input.GetKeyDown(KeyCode.Equals))
-        {
-            GainExperienceManual(20);
-        }
+        // if(Input.GetKeyDown(KeyCode.Equals))
+        // {
+        //     GainExperienceManual(20);
+        // }
         if(currentXp > requiredXp)
         {
             LevelUp();
@@ -79,7 +80,6 @@ public class LevelUISystem : MonoBehaviour
         frontXpBar.fillAmount = 0;
         backXpBar.fillAmount = 0;
         currentXp = Mathf.RoundToInt(currentXp - requiredXp);
-        GetComponent<PlayerHealth>().IncreaseHealth(level);
         requiredXp = CalculateRequiredXp();
         levelText.text = "Level " + level;
     }

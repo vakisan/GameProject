@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CharacterModel", order = 1)]
 public class CharacterModel : ScriptableObject
 {
-    public bool coin;
+    public int coin;
 
     public bool memo;
 
@@ -13,7 +13,7 @@ public class CharacterModel : ScriptableObject
 
     public string dialogue;
 
-    public void BuildCharacterModel(bool coin, bool memo, string memoDetail,string dialogue){
+    public void BuildCharacterModel(int coin, bool memo, string memoDetail,string dialogue){
         this.coin = coin;
         this.memo = memo;
         this.memoDetail = memoDetail;

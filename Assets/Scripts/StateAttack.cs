@@ -8,16 +8,29 @@ public class StateAttack : State
 
     public PlayerHealth playerHealth;
 
+    public GameObject player;
+
     private bool isAttacked = false;
 
     void Awake(){
-        playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        player = GameObject.Find("Player");
+        playerHealth = player.GetComponent<PlayerHealth>();
     }
 
     public override State RunCurrentState(float distanceToTarget,NavMeshAgent agent, Transform target)
     {
         if(!isAttacked){
+            Rigidbody rigidBody = agent.gameObject.GetComponent<Rigidbody>();
+            Vector3 originalVelocity = rigidBody.velocity;
+            Vector3 originalAngularVelocity = rigidBody.angularVelocity;
+            rigidBody.velocity = Vector3.zero;
+            rigidBody.angularVelocity = Vector3.zero;
+            rigidBody.AddRelativeForce(-originalVelocity* Time.deltaTime, ForceMode.Impulse);
+            // Rigidbody rigidbodyPlayer = player.GetComponent<Rigidbody>();
+            // rigidBody 
             StartCoroutine("Wait");
+            rigidBody.velocity = originalVelocity;
+            rigidBody.angularVelocity =originalAngularVelocity;
         }
         return this;
     }
