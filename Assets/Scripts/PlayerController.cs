@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
         if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, Mathf.Infinity)){
             if(hit.collider.gameObject.GetComponent<CharacterNPC>()){
                 CharacterModel characterModel = hit.collider.gameObject.GetComponent<CharacterNPC>().characterModel;
+                hit.collider.gameObject.GetComponent<Light>().enabled = false;
                 if(characterModel.coin <=0){
                     messageCenterUI.text = "Character has already gifted you!";
                 }
@@ -113,9 +114,11 @@ public class PlayerController : MonoBehaviour
                         memoPickup.pickupCollectible();
                         levelSystem.displayIncreasedLevelMessage(true);
                     }
+
+                    GetComponent<Timer>().timeValue = 30 + 10 * levelSystem.GetLevel();
+
                     pickup.collectible.value = characterModel.coin;
                     pickup.pickupCollectible();
-                    levelSystem.displayIncreasedLevelMessage(true);
                     levelSystem.PlayerLevelUpdate(pickup.collectible.value);
                 }
 
@@ -126,7 +129,7 @@ public class PlayerController : MonoBehaviour
                 characterModel.coin = 0;
                 messageCenterUI.GetComponent<Animation>().Play("TextFadeUp");
             }
-            else{
+            else if(hit.collider.gameObject.GetComponent<EnemyAI>()){
                 // RecoilCamera();
                 GameObject bulletObject = GameObject.Instantiate(bullet, gunTransform.position, Quaternion.identity,bulletParent);
                 BulletController bulletController = bulletObject.GetComponent<BulletController>();
@@ -135,12 +138,12 @@ public class PlayerController : MonoBehaviour
                 InflictDamageToEnemy(hit);
             }
         }
-        else{
-            GameObject bulletObject = GameObject.Instantiate(bullet, gunTransform.position, Quaternion.identity,bulletParent);
-            BulletController bulletController = bulletObject.GetComponent<BulletController>();
-            bulletController.target = cameraTransform.position + cameraTransform.forward * bulletMissDistance;
-            bulletController.hit = false;
-        }
+        // else{
+        //     GameObject bulletObject = GameObject.Instantiate(bullet, gunTransform.position, Quaternion.identity,bulletParent);
+        //     BulletController bulletController = bulletObject.GetComponent<BulletController>();
+        //     bulletController.target = cameraTransform.position + cameraTransform.forward * bulletMissDistance;
+        //     bulletController.hit = false;
+        // }
     }
 
     IEnumerator RecoilCamera(){

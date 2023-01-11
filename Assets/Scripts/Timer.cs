@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
     [SerializeField]
     public float timeValue = 30;
     [SerializeField]
-    public float originaTimeValue;
+    public float originaTimeValue = 30 ;
     [SerializeField]
     private TMP_Text timerTextUI;
     // Start is called before the first frame update
@@ -25,8 +25,12 @@ public class Timer : MonoBehaviour
 
     [SerializeField]
     private CharacterSpawner characterSpawner;
+    
+    private CutScene cutScene;
 
     void Awake(){
+
+        cutScene = GetComponent<CutScene>();
         timerTextUI = GameObject.Find("Timer").GetComponent<TMP_Text>();
         originaTimeValue = timeValue;
         sunset = 0.5 * originaTimeValue;
@@ -56,18 +60,20 @@ public class Timer : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        // if(timeValue > 2){
+        //     cutScene.SwitchOnCamera();
+        // }
+        
         if(timeValue > 0){
             timeValue-=Time.deltaTime;
         }
-        else{
-            IncrementLevel();
-            originaTimeValue = originaTimeValue + 10;
-            timeValue = originaTimeValue;
-        }
 
-        if(timeValue < originaTimeValue-3){
-            levelSystem.displayIncreasedLevelMessage(false);
+        if(timeValue + 1 > originaTimeValue){
+            cutScene.SwitchOnCamera();
+        }
+        else{
+            cutScene.SwitchOffCamera();
         }
 
         FormatTimerColour();
@@ -88,12 +94,17 @@ public class Timer : MonoBehaviour
     }
 
     void IncrementLevel(){
-        levelSystem.displayIncreasedLevelMessage(true);
+        cutScene.SwitchOnCamera();
         cleanUpLevel();
+        levelSystem.displayIncreasedLevelMessage(true);
+        originaTimeValue = originaTimeValue + 10;
+        timeValue = -10;
     }
 
     void cleanUpLevel(){
+        // Wait();
         characterSpawner.RemoveCharacters();
         characterSpawner.SpawnCharacters();
+
     }
 }
