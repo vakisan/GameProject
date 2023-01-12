@@ -124,7 +124,8 @@ public class PlayerController : MonoBehaviour
                 CharacterModel characterModel = hit.collider.gameObject.GetComponent<CharacterNPC>().characterModel;
                 hit.collider.gameObject.GetComponent<Light>().enabled = false;
                 if(characterModel.coin <=0){
-                    messageCenterUI.text = "Character has already gifted you!";
+                    messageCenterUI.text = "Character has already gifted you!<br>I will now go home! Bye";
+                    Destroy(hit.collider.gameObject,10f);
                 }
                 else{
                     messageCenterUI.text = "+" + characterModel.coin.ToString();

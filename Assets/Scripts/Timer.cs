@@ -6,9 +6,9 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     [SerializeField]
-    public float timeValue = 30;
+    public float timeValue = 60;
     [SerializeField]
-    public float originaTimeValue = 30 ;
+    public float originaTimeValue = 60 ;
     [SerializeField]
     private TMP_Text timerTextUI;
     private TMP_Text LevelTextUI;
@@ -113,7 +113,7 @@ public class Timer : MonoBehaviour
             timeValue = originaTimeValue;
         }
 
-        if(timeValue + 2 > originaTimeValue){
+        if(timeValue + 4 > originaTimeValue){
             cutScene.SwitchOnCamera();
             rotationSpeed = 20;
         }
@@ -151,8 +151,8 @@ public class Timer : MonoBehaviour
         levelSystem.displayIncreasedLevelMessage(true);
         // originaTimeValue = originaTimeValue + 10;
         // timeValue = -10;
-        timeValue = 30 + 10 * levelSystem.GetLevel();
-        originaTimeValue = 30 + 10 * levelSystem.GetLevel();
+        timeValue = 60 + 30 * levelSystem.GetLevel();
+        originaTimeValue = 60 + 30 * levelSystem.GetLevel();
     }
 
     void cleanUpLevel(){
