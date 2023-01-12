@@ -93,4 +93,8 @@ public class LevelUISystem : MonoBehaviour
         }
         return solveForRequiredXp / 4;
     }
+
+    public int GetPlayerLevel(){
+        return this.level;
+    }
 }

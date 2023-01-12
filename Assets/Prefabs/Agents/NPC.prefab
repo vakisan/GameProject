@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b3ad386aba28716448079dcf67d7aede, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterModel: {fileID: 11400000, guid: 9c705b210d361184e91f1736140afc40, type: 2}
+  rigidbody: {fileID: 0}
 --- !u!114 &1085150626307173234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,11 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74d49715f3c1ed4f980d645f345f3e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 20
-  rotationSpeed: 100
-  isWandering: 0
-  isRotatingLeft: 0
-  isRotatingRight: 0
-  isWalking: 0
-  isGrounded: 0
-  levelSystem: {fileID: 0}
+  navMeshAgent: {fileID: 0}
+  speed: 5
+  walkRadius: 25

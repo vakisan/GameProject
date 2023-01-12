@@ -51,9 +51,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "TakeDamage",
+                    "name": "Swim",
                     "type": "Button",
-                    "id": "72b20b7a-750a-49e5-93fd-76b0c519d017",
+                    "id": "eebb16a0-0626-4c84-8fe0-e18820750b4e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "831b4680-11b9-4f61-87c0-98e8b414acea",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -217,12 +226,23 @@
                 },
                 {
                     "name": "",
-                    "id": "a01fccea-2557-4caf-8ef2-3cfb212c48cd",
+                    "id": "cfd90427-af18-4cc2-9453-47b6b68d9cc3",
                     "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TakeDamage",
+                    "action": "Swim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2943d550-96c6-41ee-82e9-df69b8e1ab0f",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

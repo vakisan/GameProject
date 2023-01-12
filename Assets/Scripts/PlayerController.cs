@@ -23,8 +23,9 @@ public class PlayerController : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction lookAction;
-    private InputAction jumpAction;
+    private InputAction jumpAction,pauseAction;
     private InputAction shootAction;
+    private InputAction swimAction;
 
     private Transform cameraTransform;
 
@@ -40,24 +41,43 @@ public class PlayerController : MonoBehaviour
 
     public GameObject memoPrefab;
 
+    private Swim swim;
+
     public LevelSystem levelSystem;
+
+    private AudioSource swimAudio, walkAudio,jumpAudio, fireAudio;
+
+    private SceneManagementSystem sceneManagementSystem;
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
+        swim = GetComponent<Swim>();
+        swimAudio = GameObject.Find("SwimAudio").GetComponent<AudioSource>();
+        walkAudio = GameObject.Find("StepAudio").GetComponent<AudioSource>();
+        jumpAudio = GameObject.Find("JumpAudio").GetComponent<AudioSource>();
+        fireAudio = GameObject.Find("FireAudio").GetComponent<AudioSource>();
         levelSystem = GameObject.Find("LevelSystem").GetComponent<LevelSystem>();
         moveAction = playerInput.actions["Move"];
         lookAction = playerInput.actions["Look"];
         jumpAction = playerInput.actions["Jump"];
         shootAction = playerInput.actions["Shoot"];
+        pauseAction = playerInput.actions["Pause"];
+        swimAction = playerInput.actions["Swim"];
         cameraTransform = Camera.main.transform;
-
+        sceneManagementSystem = GameObject.Find("SceneManager").GetComponent<SceneManagementSystem>();
         messageCenterUI = GameObject.Find("CollectibleMessage").GetComponent<TMPro.TMP_Text>();
     }
 
     
     void OnEnable(){
         shootAction.performed += _ => Shoot();
+        pauseAction.performed += _ => Pause();
+    }
+
+    void Pause(){
+        sceneManagementSystem.pause();
     }
 
     void OnDisable(){
@@ -69,6 +89,7 @@ public class PlayerController : MonoBehaviour
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
+            walkAudio.PlayDelayed(3f);
             playerVelocity.y = 0f;
         }
 
@@ -79,9 +100,15 @@ public class PlayerController : MonoBehaviour
 
         // Changes the height position of the player..
         if (jumpAction.triggered && groundedPlayer)
-        {
+        {   
+            jumpAudio.Play();
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         }
+        if(swimAction.triggered){
+            swimAudio.Play();
+            swim.canSwim = !swim.canSwim;
+        }
+
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
@@ -93,6 +120,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(cameraTransform.position,cameraTransform.forward,out hit, Mathf.Infinity)){
             if(hit.collider.gameObject.GetComponent<CharacterNPC>()){
+                // hit.collider.gameObject.GetComponent<MeshRenderer>().enabled = false;
                 CharacterModel characterModel = hit.collider.gameObject.GetComponent<CharacterNPC>().characterModel;
                 hit.collider.gameObject.GetComponent<Light>().enabled = false;
                 if(characterModel.coin <=0){
@@ -102,20 +130,13 @@ public class PlayerController : MonoBehaviour
                     messageCenterUI.text = "+" + characterModel.coin.ToString();
                     CollectiblePickup pickup = hit.collider.gameObject.GetComponent<CollectiblePickup>();
                     if(characterModel.memo){
-                        Debug.Log("pickedupMemo");
                         Vector3 position = pickup.transform.position;
                         position.y = 10;
                         CollectiblePickup memoPickup = Instantiate(memoPrefab, position , pickup.transform.rotation).GetComponent<CollectiblePickup>();
                         memoPickup.collectible.collectibleType = CollectibleType.Memo;
-                        Debug.Log(memoPickup.collectible.collectibleType);
                         memoPickup.collectible.collectibleName = CollectibleType.Memo.ToString();
                         memoPickup.collectible.description = characterModel.memoDetail;
-                        Debug.Log(memoPickup.collectible.description);
-                        memoPickup.pickupCollectible();
-                        levelSystem.displayIncreasedLevelMessage(true);
                     }
-
-                    GetComponent<Timer>().timeValue = 30 + 10 * levelSystem.GetLevel();
 
                     pickup.collectible.value = characterModel.coin;
                     pickup.pickupCollectible();
@@ -129,8 +150,19 @@ public class PlayerController : MonoBehaviour
                 characterModel.coin = 0;
                 messageCenterUI.GetComponent<Animation>().Play("TextFadeUp");
             }
+            else if(hit.collider.gameObject.GetComponent<CollectiblePickup>()){
+                GameObject gameObject = hit.collider.gameObject;
+
+                CollectiblePickup memoPickup = gameObject.GetComponent<CollectiblePickup>();
+                memoPickup.pickupCollectible();
+                levelSystem.displayIncreasedLevelMessage(true);
+                levelSystem.GetComponent<Timer>().IncrementLevel();
+                Destroy(gameObject);
+            }
             else if(hit.collider.gameObject.GetComponent<EnemyAI>()){
                 // RecoilCamera();
+                fireAudio.Play();
+                Debug.Log("True");
                 GameObject bulletObject = GameObject.Instantiate(bullet, gunTransform.position, Quaternion.identity,bulletParent);
                 BulletController bulletController = bulletObject.GetComponent<BulletController>();
                 bulletController.target = hit.point; 
@@ -150,6 +182,11 @@ public class PlayerController : MonoBehaviour
         Camera.main.transform.Rotate(Vector3.up * 100,Space.Self);
         yield return new WaitForSeconds(0.5f);
         Camera.main.transform.Rotate(Vector3.down * 100,Space.Self);
+    }
+    
+    IEnumerator DestroyPickup(CollectiblePickup collectiblePickup){
+        yield return new WaitForSeconds(5f);
+        Destroy(collectiblePickup);
     }
 
     void InflictDamageToEnemy(RaycastHit hit){

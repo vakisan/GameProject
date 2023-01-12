@@ -208,8 +208,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 701028189}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: gameStart
+        m_TargetAssemblyTypeName: SceneManagementSystem, Assembly-CSharp
+        m_MethodName: settings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 701028185}
   - component: {fileID: 701028189}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: SaveSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 701028184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87234dcd16de9417e9c0be74fa4b520e, type: 3}
+  m_Script: {fileID: 11500000, guid: 07e721d9e2fdefc44b026ab4ee0fe8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &848799184
@@ -434,7 +434,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cc8057e89684d4726b6f7ade10ba28de, type: 3}
+  m_Sprite: {fileID: 21300000, guid: af96c8ccd7e119b41804061c18b897ac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -707,7 +707,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 701028189}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: SceneManagementSystem, Assembly-CSharp
         m_MethodName: gameStart
         m_Mode: 1
         m_Arguments:
@@ -1330,7 +1330,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 701028189}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: SceneManagementSystem, Assembly-CSharp
         m_MethodName: gameEnd
         m_Mode: 1
         m_Arguments:

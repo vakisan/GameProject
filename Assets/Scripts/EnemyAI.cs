@@ -7,7 +7,7 @@ using TMPro;
 public class EnemyAI : MonoBehaviour {
 
     [SerializeField]
-    private Transform target;
+    public Transform target;
     private NavMeshAgent navMeshAgent;
     private NavMeshPath navMeshPath;
     private StateMachineSystem stateMachineSystem;
@@ -23,6 +23,7 @@ public class EnemyAI : MonoBehaviour {
     public TMP_Text shotLeftUI;
 
     private void Awake(){
+        target = GameObject.Find("Player").transform;
         originalShotToTakeDown = shotToTakeDown;
         navMeshAgent = GetComponent<NavMeshAgent>();
         stateMachineSystem = GetComponent<StateMachineSystem>();

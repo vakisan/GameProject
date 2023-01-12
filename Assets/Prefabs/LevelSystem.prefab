@@ -508,7 +508,7 @@ Transform:
   - {fileID: 4482632395910960589}
   - {fileID: 4482632396192821640}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4482632396920412490
 MonoBehaviour:
@@ -530,6 +530,7 @@ MonoBehaviour:
   sunset: 0
   levelSystem: {fileID: 0}
   characterSpawner: {fileID: 0}
+  rotationSpeed: 1
 --- !u!114 &4482632396920412485
 MonoBehaviour:
   m_ObjectHideFlags: 0

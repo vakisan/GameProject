@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
     public float originaTimeValue = 30 ;
     [SerializeField]
     private TMP_Text timerTextUI;
+    private TMP_Text LevelTextUI;
     // Start is called before the first frame update
 
     [SerializeField]
@@ -25,17 +26,36 @@ public class Timer : MonoBehaviour
 
     [SerializeField]
     private CharacterSpawner characterSpawner;
+
+    private EnemySpawner enemySpawner;
     
     private CutScene cutScene;
 
-    void Awake(){
+    private SaveStateManager saveStateManager;
 
+    [SerializeField]
+    private int rotationSpeed = 1;
+
+    private PlayerHealth playerHealth;
+
+    public static bool isSunset;
+
+    void Awake(){
+        saveStateManager = GameObject.Find("SaveSystem").GetComponent<SaveStateManager>();
+        playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
         cutScene = GetComponent<CutScene>();
         timerTextUI = GameObject.Find("Timer").GetComponent<TMP_Text>();
+        LevelTextUI = GameObject.Find("PrefixTimer").GetComponent<TMP_Text>(); 
         originaTimeValue = timeValue;
         sunset = 0.5 * originaTimeValue;
         characterSpawner = GetComponent<CharacterSpawner>();
+        enemySpawner = GetComponent<EnemySpawner>();
         levelSystem = GetComponent<LevelSystem>();
+    }
+
+    void Start(){
+        saveStateManager.LoadPlayerState();
+        // saveStateManager.SavePlayerState();
     }
 
     void DisplayTimer(float displayTime)
@@ -46,14 +66,17 @@ public class Timer : MonoBehaviour
 
         float minutes = Mathf.FloorToInt(displayTime/60);
         float seconds = Mathf.FloorToInt(displayTime % 60);
-
+        
         timerTextUI.text = string.Format("{0:00}:{1:00}",minutes,seconds);
+        LevelTextUI.text = "Time to Clear Level " + levelSystem.GetLevel().ToString();
     }
 
     void rotateSunlight(){
         double sunligthRatio = timeValue/originaTimeValue;
+        sunset = originaTimeValue * 0.5;
+        isSunset = timeValue < sunset;
 
-        sunLightRotation = Mathf.Lerp(270,0,(float) sunligthRatio);
+        sunLightRotation = Mathf.Lerp(270,0,(float) sunligthRatio) * rotationSpeed;
 
         sunLight.transform.rotation = Quaternion.AngleAxis((float) sunLightRotation, Vector3.right);
     }
@@ -61,24 +84,30 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        // if(timeValue > 2){
-        //     cutScene.SwitchOnCamera();
-        // }
         
         if(timeValue > 0){
             timeValue-=Time.deltaTime;
         }
+        else{
+            saveStateManager.LoadPlayerState();
+        }
 
-        if(timeValue + 1 > originaTimeValue){
+        if(timeValue + 2 > originaTimeValue){
             cutScene.SwitchOnCamera();
+            rotationSpeed = 20;
         }
         else{
             cutScene.SwitchOffCamera();
+            rotationSpeed = 1;
         }
 
         FormatTimerColour();
         rotateSunlight();
         DisplayTimer(timeValue);
+    }
+
+    IEnumerator Wait(){
+        yield return new WaitForSeconds(2);
     }
 
     void FormatTimerColour(){
@@ -93,18 +122,22 @@ public class Timer : MonoBehaviour
         }
     }
 
-    void IncrementLevel(){
+    public void IncrementLevel(){
+        playerHealth.RestoreHealth(originaTimeValue);
+        saveStateManager.SavePlayerState();
         cutScene.SwitchOnCamera();
         cleanUpLevel();
         levelSystem.displayIncreasedLevelMessage(true);
-        originaTimeValue = originaTimeValue + 10;
-        timeValue = -10;
+        // originaTimeValue = originaTimeValue + 10;
+        // timeValue = -10;
+        timeValue = 30 + 10 * levelSystem.GetLevel();
+        originaTimeValue = 30 + 10 * levelSystem.GetLevel();
     }
 
     void cleanUpLevel(){
         // Wait();
         characterSpawner.RemoveCharacters();
         characterSpawner.SpawnCharacters();
-
+        enemySpawner.SpawnCharacters();
     }
 }

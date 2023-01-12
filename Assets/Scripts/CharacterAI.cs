@@ -41,6 +41,13 @@ public class CharacterAI : MonoBehaviour {
         if(navMeshAgent!= null && navMeshAgent.enabled && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance){
             navMeshAgent.SetDestination(Roam());
         }
+
+        if(!Timer.isSunset){
+            navMeshAgent.gameObject.GetComponent<Light>().color = Color.red;
+        }
+        else{
+            navMeshAgent.gameObject.GetComponent<Light>().color = Color.yellow;
+        }
     }
 
 }

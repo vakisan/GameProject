@@ -18,9 +18,9 @@ public class StateIdle : State
             agent.SetDestination(Roam());
         }
 
-        if(!isRecovering){
-            StartCoroutine("Wait");
-        }
+        // if(!isRecovering){
+        //     StartCoroutine("Wait");
+        // }
 
         
         return this;

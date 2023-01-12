@@ -7,9 +7,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField]
     private float health;
     private float lerpTimer;
-    public float maxHealth = 100;
+    public float maxHealth = 100f;
     public float chipSpeed = 2f;
     public Image frontHealthBar;
     public Image backHealthBar;
@@ -21,20 +22,17 @@ public class PlayerHealth : MonoBehaviour
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        takeDamage = playerInput.actions["TakeDamage"];
-        Debug.Log(takeDamage);
-        health = maxHealth;
+        health = 100f;
     }
 
-    void OnEnable(){
-        takeDamage.performed += _ => TakeDamage(Random.Range(5, 10));
+    public float GetHealth(){
+        return this.health;
     }
 
-    void OnDisable(){
-        takeDamage.performed -= _ => TakeDamage(Random.Range(5, 10));
+    public void SetHealth(float value){
+        health = value;
     }
-    
-    // Update is called once per frame
+
     void Update()
     {
         health = Mathf.Clamp(health, 0, maxHealth);
@@ -53,7 +51,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void UpdateHealthUI()
     {
-        //Debug.Log(health);
+        // Debug.Log(health);
         float fillF = frontHealthBar.fillAmount;
         float fillB = backHealthBar.fillAmount;
         float hFraction = health / maxHealth;

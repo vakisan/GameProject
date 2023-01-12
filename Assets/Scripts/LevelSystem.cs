@@ -13,6 +13,8 @@ public class LevelSystem : MonoBehaviour
     public TMP_Text levelMessage;
 
     public LevelUISystem levelUISystem;
+
+    private Timer timer;
     // Start is called before the first frame update
     void Awake()
     {
@@ -20,6 +22,7 @@ public class LevelSystem : MonoBehaviour
         difficulty = 10;
         levelMessage = GameObject.Find("LevelChangeMessage").GetComponent<TMP_Text>();
         levelUISystem = GetComponent<LevelUISystem>();
+        timer = GetComponent<Timer>();
     }
 
     public int GetLevel()
@@ -27,20 +30,23 @@ public class LevelSystem : MonoBehaviour
         return level;
     }
 
+    public void SetLevel(int newLevel){
+        this.level = newLevel;
+    }
+
     public int GetDifficulty(){
         return difficulty;
     }
 
-    private void increaseLevel(int difficulty=1){
+    public void displayIncreasedLevelMessage(bool display){
         levelMessage.enabled = true;
         level++;
         levelMessage.text = "Congratulations! You have reached Level " + level; 
-        this.level += difficulty;
+        // this.level += difficulty
     }
 
-    public void displayIncreasedLevelMessage(bool display){
-        increaseLevel();
-        levelMessage.enabled = display;
+    IEnumerator Wait(){
+        yield return new WaitForSeconds(5);
     }
 
     public void PlayerLevelUpdate(int coins){
