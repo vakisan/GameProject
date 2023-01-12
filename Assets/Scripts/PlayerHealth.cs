@@ -37,6 +37,9 @@ public class PlayerHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
+        if(health <= 0){
+            SceneManagementSystem.MainMenu();
+        }
         // if(Input.GetKeyDown(KeyCode.A))
         // {
         //     TakeDamage(Random.Range(5, 10));

@@ -40,6 +40,10 @@ public class Timer : MonoBehaviour
 
     public static bool isSunset;
 
+    public static bool shouldStateBeLoaded = false;
+
+    public static bool shouldGameBeLoaded = false;
+
     void Awake(){
         saveStateManager = GameObject.Find("SaveSystem").GetComponent<SaveStateManager>();
         playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
@@ -84,12 +88,29 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+        if(shouldGameBeLoaded){
+            shouldGameBeLoaded = false;
+            if(shouldStateBeLoaded){
+                shouldStateBeLoaded = false;
+                if(saveStateManager.DoesSaveExit()){
+                    saveStateManager.LoadPlayerState();
+                    SceneManagementSystem.Resume();
+                }
+                else{
+                    SceneManagementSystem.StartNewGame();
+                }
+            }
+            else{
+                SceneManagementSystem.StartNewGame();
+            }
+        }
         
         if(timeValue > 0){
             timeValue-=Time.deltaTime;
         }
-        else{
-            saveStateManager.LoadPlayerState();
+        else if(timeValue <= 0){
+            SceneManagementSystem.MainMenu();
+            timeValue = originaTimeValue;
         }
 
         if(timeValue + 2 > originaTimeValue){

@@ -8,7 +8,7 @@ public class LevelSystem : MonoBehaviour
 
     private int level;
 
-    private int difficulty;
+    public static int difficulty;
 
     public TMP_Text levelMessage;
 
